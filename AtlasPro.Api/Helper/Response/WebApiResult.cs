@@ -4,7 +4,7 @@ using System.Net;
 using Application.BusinessLogic;
 using Application.BusinessLogic.Message;
 
-namespace LivestockInput.Api.Helper.Response
+namespace SOP.Api.Helper.Response
 {
     public class WebApiResult
     {

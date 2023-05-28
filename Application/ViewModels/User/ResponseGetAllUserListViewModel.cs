@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Application.ViewModels.Public;
-using Common.Enum;
 using Common.Enums;
 using Common.Enums.User;
-using Framework;
+
 
 namespace Application.ViewModels.User
 {

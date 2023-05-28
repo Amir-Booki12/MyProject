@@ -1,5 +1,4 @@
-﻿using Common.Enum;
-using Common.Enum.Claim;
+﻿using Common.Enums;
 using Common.Enums.RolesManagment;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.GetDat
+namespace Common.GetClaimUtils
 {
     public class RoleValueUser
     {
@@ -32,12 +31,12 @@ namespace Common.GetDat
         //    var httpContextAccessor = (IHttpContextAccessor)validationContext.GetService(typeof(IHttpContextAccessor));
         //    var user = httpContextAccessor.HttpContext.User;
         //}
-        public static List<string> GetUserClaimsValue(this ClaimsPrincipal principal,string claimType)
+        public static List<string> GetUserClaimsValue(this ClaimsPrincipal principal, string claimType)
         {
             if (principal == null)
                 throw new ArgumentNullException(nameof(principal));
 
-            return principal.Claims.Where(x => x.Type == claimType).Select(x=>x.Value).ToList();
+            return principal.Claims.Where(x => x.Type == claimType).Select(x => x.Value).ToList();
         }
         public static List<string> GetUserRolesValue(this ClaimsPrincipal principal)
         {
@@ -72,7 +71,7 @@ namespace Common.GetDat
             if (principal == null)
                 throw new ArgumentNullException(nameof(principal));
 
-            return Convert.ToInt64(principal.Claims.FirstOrDefault(x=>x.Type == ClaimTypes.NameIdentifier)?.Value);
+            return Convert.ToInt64(principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value);
         }
 
         public static string GetPhoneNumber(this ClaimsPrincipal principal)
@@ -104,7 +103,7 @@ namespace Common.GetDat
                 .Select(x => new RoleValueUser()
                 {
                     Value = x.Value,
-                    Description = ((UserRolesEnum)System.Enum.Parse(typeof(UserRolesEnum), x.Value)).GetEnumDescription(),
+                    Description = ((UserRolesEnum)Enum.Parse(typeof(UserRolesEnum), x.Value)).GetEnumDescription(),
                 }).ToList();
         }
     }

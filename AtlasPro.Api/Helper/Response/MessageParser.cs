@@ -7,7 +7,7 @@ using System.Text;
 using Application.BusinessLogic.Message;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace LivestockInput.Api.Helper.Response
+namespace SOP.Api.Helper.Response
 {
     #region Classes
 

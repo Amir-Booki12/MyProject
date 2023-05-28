@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Framework
+namespace Common
 {
     public static class CommonExtensions
     {
@@ -96,7 +96,7 @@ namespace Framework
                                      @"(?'Year'(^[1-4]\d{3})|(\d{2}))[/-:](((?'Month'0?[1-6])\/((?'Day'(3[0-1])|([1-2][0-9])|(0?[1-9])))|((?'Month'1[0-2]|(0?[7-9]))\/(?'Day'30|([1-2][0-9])|(0?[1-9])))))$");
                 if (!match.Success)
                 {
-                    throw new System.Exception("InvalidPersianDate");
+                    throw new Exception("InvalidPersianDate");
                 }
                 var yearGroup = match.Groups["Year"].ToString();
                 if (yearGroup.Length == 2)
@@ -119,12 +119,12 @@ namespace Framework
                         return DateTime.MinValue;
                 }
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 throw new Exception("InvalidPersianDate");
             }
         }
-        public static DateTime ConvertJalaliToMiladi(int year,int month,int day)
+        public static DateTime ConvertJalaliToMiladi(int year, int month, int day)
         {
             var calendar = new PersianCalendar();
             var timeSpan = new TimeSpan(0, 0, 0, 0);
@@ -141,7 +141,7 @@ namespace Framework
         }
         public static string ConvertMiladiToJalali(this DateTime date, bool showTime)
         {
-            if ((date <= DateTime.MinValue))
+            if (date <= DateTime.MinValue)
             {
                 return "";
             }
@@ -163,19 +163,19 @@ namespace Framework
 
         public static string ConvertMiladiToJalali(this DateTime date)
         {
-            return ConvertMiladiToJalali(date, false);
+            return date.ConvertMiladiToJalali(false);
         }
 
         public static string ConvertMiladiToJalali(this DateTime? date)
         {
-            return date == null ? string.Empty : ConvertMiladiToJalali((DateTime)date, false);
+            return date == null ? string.Empty : ((DateTime)date).ConvertMiladiToJalali(false);
         }
-  
+
 
         public static bool IsValidPersianDate(this string shamsiDate)
         {
             const bool result = false;
-            if (shamsiDate==null)
+            if (shamsiDate == null)
             {
                 return false;
             }
@@ -204,19 +204,19 @@ namespace Framework
             }
 
             //Check Year
-            if ((year < 0) || (year > 2000))
+            if (year < 0 || year > 2000)
             {
                 //Result = false;
                 return false;
             }
             //Check Month
-            if ((month < 0) || (month > 12))
+            if (month < 0 || month > 12)
             {
                 //Result = false;
                 return false;
             }
             //Check Day
-            if ((day < 0) || (day > 31))
+            if (day < 0 || day > 31)
             {
                 // Result = false;
                 return false;
@@ -227,7 +227,7 @@ namespace Framework
                 //Result = true;
                 return true;
             }
-            if ((month < 12) && (month > 6))
+            if (month < 12 && month > 6)
             {
                 if (day > 30)
                 {
@@ -263,12 +263,12 @@ namespace Framework
         {
             if (date == null) return 0;
             PersianCalendar calendar = new PersianCalendar();
-           
+
             return calendar.GetYear(date.Value);
         }
         public static int GetPersianYear(this DateTime date)
         {
-           
+
             PersianCalendar calendar = new PersianCalendar();
 
             return calendar.GetYear(date);
@@ -291,7 +291,7 @@ namespace Framework
                 else if (newMonth > 12)
                 {
                     newYear++;
-                    newMonth = ((newMonth % 12) == 0) ? 12 : (newMonth % 12);
+                    newMonth = newMonth % 12 == 0 ? 12 : newMonth % 12;
                 }
                 if (newMonth > 6 && newMonth < 12 && parts[2] == "31")
                 {
@@ -301,7 +301,7 @@ namespace Framework
                 {
                     parts[2] = "29";
                 }
-                return ConvertJalaliToMiladi(newYear + "/" + newMonth + "/" + parts[2]);
+                return (newYear + "/" + newMonth + "/" + parts[2]).ConvertJalaliToMiladi();
             }
             return DateTime.Now;
         }
@@ -327,7 +327,7 @@ namespace Framework
 
         public static int SafeBoolToInt(this object i)
         {
-            var b = SafeBool(i);
+            var b = i.SafeBool();
             return b ? 1 : 0;
         }
 
@@ -401,7 +401,7 @@ namespace Framework
 
         public static int SafeInt(this object i)
         {
-            return SafeInt(i, -1);
+            return i.SafeInt(-1);
         }
 
         public static string PersianNumberToLatin(this string number)
@@ -490,7 +490,7 @@ namespace Framework
         {
             if (d != null)
             {
-                Boolean.TryParse(d.SafeString(), out var dt);
+                bool.TryParse(d.SafeString(), out var dt);
                 return dt;
             }
             return new bool();
@@ -550,7 +550,7 @@ namespace Framework
 
         public static long SafeLong(this object i)
         {
-            return SafeLong(i, 0);
+            return i.SafeLong(0);
         }
 
         public static long SafeLong(this object i, long exceptionValue)
@@ -559,7 +559,7 @@ namespace Framework
             {
                 return exceptionValue;
             }
-            Int64.TryParse(i.SafeString(), out exceptionValue);
+            long.TryParse(i.SafeString(), out exceptionValue);
             return exceptionValue;
         }
 
@@ -584,10 +584,10 @@ namespace Framework
             return exceptionValue;
         }
 
-        public static Int16 SafeInt16(this object i)
+        public static short SafeInt16(this object i)
         {
-            Int16 id;
-            Int16.TryParse(i.SafeString(), out id);
+            short id;
+            short.TryParse(i.SafeString(), out id);
             return id;
         }
 
@@ -598,7 +598,7 @@ namespace Framework
             return id;
         }
 
-        public static TValue SafeDictionary<TKey, TValue>(this Dictionary<TKey, TValue> input, TKey key, TValue ifNotFound = default(TValue))
+        public static TValue SafeDictionary<TKey, TValue>(this Dictionary<TKey, TValue> input, TKey key, TValue ifNotFound = default)
         {
             TValue val;
             if (input.TryGetValue(key, out val))
@@ -664,9 +664,9 @@ namespace Framework
                     case "9999999999":
                         return false;
                 }
-                int num3 = ((((((((numArray[0] * 10) + (numArray[1] * 9)) + (numArray[2] * 8)) + (numArray[3] * 7)) + (numArray[4] * 6)) + (numArray[5] * 5)) + (numArray[6] * 4)) + (numArray[7] * 3)) + (numArray[8] * 2);
-                int num4 = num3 - ((num3 / 11) * 11);
-                if ((((num4 == 0) && (num2 == num4)) || ((num4 == 1) && (num2 == 1))) || ((num4 > 1) && (num2 == Math.Abs((int)(num4 - 11)))))
+                int num3 = numArray[0] * 10 + numArray[1] * 9 + numArray[2] * 8 + numArray[3] * 7 + numArray[4] * 6 + numArray[5] * 5 + numArray[6] * 4 + numArray[7] * 3 + numArray[8] * 2;
+                int num4 = num3 - num3 / 11 * 11;
+                if (num4 == 0 && num2 == num4 || num4 == 1 && num2 == 1 || num4 > 1 && num2 == Math.Abs(num4 - 11))
                 {
                     return true;
                 }

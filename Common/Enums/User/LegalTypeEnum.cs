@@ -1,6 +1,4 @@
-﻿
-
-namespace Common.Enums
+﻿namespace Common.Enums.User
 {
     //public enum LegalTypeEnum
     //{

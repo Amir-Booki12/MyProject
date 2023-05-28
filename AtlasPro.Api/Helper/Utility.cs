@@ -6,7 +6,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Presentation.WebApi
+namespace SOP.Api.Helper
 {
     public static class Utility
     {

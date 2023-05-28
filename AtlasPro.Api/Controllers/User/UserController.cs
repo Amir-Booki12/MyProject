@@ -11,7 +11,7 @@ using Infrastructure.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace AtlasPro.Api.Controllers.User
+namespace SOP.Api.Controllers.User
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -75,7 +75,7 @@ namespace AtlasPro.Api.Controllers.User
         public async Task<IActionResult> GetUserRolesClaims()
         {
             _logger.LogInformation("GetUserRolesClaims");
-            return ApiResult(await _userAccountService.GetUserRolesClaims(this.User));
+            return ApiResult(await _userAccountService.GetUserRolesClaims(User));
         }
 
         /// <summary>

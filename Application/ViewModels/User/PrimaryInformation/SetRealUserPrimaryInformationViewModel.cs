@@ -1,7 +1,6 @@
-﻿using Common.Enum;
+﻿using Common;
 using Common.Enums;
 using Common.Enums.User;
-using Framework;
 using Microsoft.AspNetCore.Http;
 using System;
 

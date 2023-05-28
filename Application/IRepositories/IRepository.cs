@@ -11,6 +11,7 @@ namespace Application.IRepositories
     public interface IRepository<TEntity> : IDisposable
         where TEntity : class
     {
+        TEntity Get(long id);
         IQueryable<TEntity> DeferdSelectAll();
         TEntity Add(TEntity entity);
         Task<TEntity> AddAsync(TEntity entity, bool autoSave = true);

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Enum.Location
+namespace Common.Enums.Location
 {
     public enum CityOrVilageTypeEnum
     {

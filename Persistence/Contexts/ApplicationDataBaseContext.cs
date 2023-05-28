@@ -1,5 +1,5 @@
 ﻿using Application.IRepositories;
-using Common.Enum.Claim;
+using Common.Enums;
 using Domain.Attributes;
 using Domain.Entities.UserAgg;
 using Infrastructure.DataAccess.Repositories;
@@ -36,6 +36,9 @@ namespace Persistence.Contexts
         protected override void OnModelCreating(ModelBuilder builder)
         {
             Config(builder);
+
+            var assembly = typeof(OnProductModelCreatingConfig).Assembly;
+            builder.ApplyConfigurationsFromAssembly(assembly);
             base.OnModelCreating(builder);
         }
       

@@ -1,5 +1,5 @@
-﻿using Common.Enum.Location;
-using Common.Enums;
+﻿using Common.Enums;
+using Common.Enums.Location;
 using Domain.Attributes;
 using Domain.Entities.BaseAgg;
 using System.Collections.Generic;

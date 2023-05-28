@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Application.Services.InterfaceClass.Location;
+using SOP.Api.Controllers;
 
-namespace AtlasPro.Api.Controllers
+namespace SOP.Api.Controllers.Location
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -37,7 +38,7 @@ namespace AtlasPro.Api.Controllers
         {
             return ApiResult(await _locationService.GetAllProvincesForDropDown());
         }
-        
+
         /// <summary>
         /// لیست همه ی شهرستان ها ی استان برای دراپ داون
         /// </summary>
@@ -49,7 +50,7 @@ namespace AtlasPro.Api.Controllers
         {
             return ApiResult(await _locationService.GetAllCountiesForDropDown(provinceId));
         }
-        
+
         /// <summary>
         /// * لیست همه ی شهر/روستا های شهرستان
         /// </summary>

@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Common.Enum;
+using Common.Enums;
 using Common.Enums.RolesManagment;
 using Domain.Entities.UserAgg;
 using Microsoft.EntityFrameworkCore;

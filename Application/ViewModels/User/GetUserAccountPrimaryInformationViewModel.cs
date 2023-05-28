@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Enum;
 using Common.Enums;
-using Framework;
 using Application.ViewModels.User.PrimaryInformation;
 using Common.Enums.User;
+using Common;
 
 namespace Application.ViewModels.User
 {

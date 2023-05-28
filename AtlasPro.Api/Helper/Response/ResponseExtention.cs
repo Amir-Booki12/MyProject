@@ -2,12 +2,11 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using LivestockInput.Api.Helper.Response;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Presentation.WebApi
+namespace SOP.Api.Helper.Response
 {
     public static class ResponseExtention
     {
@@ -42,7 +41,7 @@ namespace Presentation.WebApi
 
         public static IActionResult ToHttpResponse(this WebApiResult data)
         {
-           
+
             switch (data.HttpStatusCode)
             {
                 case HttpStatusCode.OK:

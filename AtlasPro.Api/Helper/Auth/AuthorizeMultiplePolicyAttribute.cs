@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Presentation.WebApi
+namespace SOP.Api.Helper.Auth
 {
     public class AuthorizeMultiplePolicyAttribute : TypeFilterAttribute
     {

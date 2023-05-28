@@ -1,7 +1,6 @@
 using Application.AutoMapper;
 using Application.IRepositories;
-using AtlasPro.Api.Swagger;
-using Common.Enum.Claim;
+using Common.Enums;
 using Domain.Entities.UserAgg;
 using Infrastructure.IOC;
 using Infrastructure.IOC.IdentityContextConfigs;
@@ -16,13 +15,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Persistence.Contexts;
+using SOP.Api.Swagger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace AtlasPro.Api
+namespace SOP.Api
 {
     public class Startup
     {
@@ -59,7 +59,8 @@ namespace AtlasPro.Api
             services.AddUsersServices();
             services.AddLocationService();
             services.AddCommonService();
-           
+            services.AddProductService();
+
 
             services.AddAutoMapper(AutoMapperConfig.RegisterMappings());
 
@@ -111,43 +112,43 @@ namespace AtlasPro.Api
             });
 
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Web Portal APIs",
-                    Description = "Core Web API",
-                    TermsOfService = new Uri("http://Koroo.com/terms"),
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Team",
-                        Email = "saberbazrafshan41@gmail.com",
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "Use Under Mit",
-                        Url = new Uri("https://Koroo.com/license"),
-                    }
-                });
-                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-                {
-                    Type = SecuritySchemeType.OAuth2,
-                    Flows = new OpenApiOAuthFlows
-                    {
-                        AuthorizationCode = new OpenApiOAuthFlow
-                        {
-                            AuthorizationUrl = new Uri(GetSSOValue("AuthorizationUrl")),
-                            TokenUrl = new Uri(GetSSOValue("TokenUrl")),
-                            Scopes = new Dictionary<string, string>
-                            {
-                                {"api1", "Demo API - full access"},
-                            }
-                        }
-                    }
-                });
-                c.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
-            });
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo
+            //    {
+            //        Version = "v1",
+            //        Title = "Web Portal APIs",
+            //        Description = "Core Web API",
+            //        TermsOfService = new Uri("http://Koroo.com/terms"),
+            //        Contact = new OpenApiContact
+            //        {
+            //            Name = "Team",
+            //            Email = "saberbazrafshan41@gmail.com",
+            //        },
+            //        License = new OpenApiLicense
+            //        {
+            //            Name = "Use Under Mit",
+            //            Url = new Uri("https://Koroo.com/license"),
+            //        }
+            //    });
+            //    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+            //    {
+            //        Type = SecuritySchemeType.OAuth2,
+            //        Flows = new OpenApiOAuthFlows
+            //        {
+            //            AuthorizationCode = new OpenApiOAuthFlow
+            //            {
+            //                AuthorizationUrl = new Uri(GetSSOValue("AuthorizationUrl")),
+            //                TokenUrl = new Uri(GetSSOValue("TokenUrl")),
+            //                Scopes = new Dictionary<string, string>
+            //                {
+            //                    {"api1", "Demo API - full access"},
+            //                }
+            //            }
+            //        }
+            //    });
+            //    c.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

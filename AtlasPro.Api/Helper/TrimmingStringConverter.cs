@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Presentation.WebApi.Helper
+namespace SOP.Api.Helper
 {
     public class TrimmingStringConverter : JsonConverter
     {

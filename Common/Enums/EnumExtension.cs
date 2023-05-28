@@ -2,35 +2,33 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Common.Enums;
-using Framework;
 
-namespace Common.Enum
+namespace Common.Enums
 {
     public static class EnumExtension
     {
-        public static TAttribute GetAttribute<TAttribute>(this System.Enum value)
+        public static TAttribute GetAttribute<TAttribute>(this Enum value)
             where TAttribute : Attribute
         {
             var type = value.GetType();
-            var name = System.Enum.GetName(type, value);
+            var name = Enum.GetName(type, value);
             if (name == null)
                 return null;
             return type.GetField(name).GetCustomAttributes(false).OfType<TAttribute>().SingleOrDefault();
         }
 
-        public static string GetPatternName(this System.Enum value)
+        public static string GetPatternName(this Enum value)
         {
             if (value == null)
             {
                 return string.Empty;
             }
 
-            var description = GetAttribute<Pattern>(value);
+            var description = value.GetAttribute<Pattern>();
             return description?.PatternName;
         }
-        
-        public static string GetEnumDescription(this System.Enum value)
+
+        public static string GetEnumDescription(this Enum value)
         {
 
             if (value == null)
@@ -38,25 +36,25 @@ namespace Common.Enum
                 return string.Empty;
             }
 
-            var description = GetAttribute<DescriptionAttribute>(value);
+            var description = value.GetAttribute<DescriptionAttribute>();
             return description?.Description;
         }
 
         public static T? SafeNullableEnum2<T>(this int e) where T : struct
         {
-            if (!System.Enum.IsDefined(typeof(T), e))
+            if (!Enum.IsDefined(typeof(T), e))
                 return null;
-            return (T) System.Enum.ToObject(typeof(T), e);
+            return (T)Enum.ToObject(typeof(T), e);
         }
 
         public static T? SafeNullableEnum2<T>(this int? e) where T : struct
         {
-            if (!System.Enum.IsDefined(typeof(T), e))
+            if (!Enum.IsDefined(typeof(T), e))
                 return null;
-            return (T) System.Enum.ToObject(typeof(T), e);
+            return (T)Enum.ToObject(typeof(T), e);
         }
 
-        public static int GetId(this System.Enum value)
+        public static int GetId(this Enum value)
         {
             if (value == null)
             {
@@ -66,12 +64,12 @@ namespace Common.Enum
             var val = Convert.ChangeType(value, typeof(int));
             return val.SafeInt();
         }
-        public static string? GetName(this System.Enum value)
+        public static string GetName(this Enum value)
         {
             return value == null ? null : nameof(value);
         }
 
-        public static string EnumListToString<T>(this List<T> value) where T : System.Enum
+        public static string EnumListToString<T>(this List<T> value) where T : Enum
         {
             string result = "";
             foreach (var item in value)
@@ -83,13 +81,13 @@ namespace Common.Enum
             return result;
         }
 
-        public static List<T> ToEnumList<T>(this string value) where T : System.Enum
+        public static List<T> ToEnumList<T>(this string value) where T : Enum
         {
             var result = new List<T>();
 
             foreach (var item in value)
             {
-                var t = (T) System.Enum.Parse(typeof(T), item.ToString());
+                var t = (T)Enum.Parse(typeof(T), item.ToString());
                 result.Add(t);
             }
 

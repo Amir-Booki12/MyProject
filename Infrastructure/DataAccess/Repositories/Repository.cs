@@ -194,5 +194,9 @@ namespace Infrastructure.DataAccess.Repositories
             //_disposed = true;
         }
 
+        public TEntity Get(long id)
+        {
+            return _dbSet.Find(id);
+        }
     }
 }

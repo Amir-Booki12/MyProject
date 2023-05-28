@@ -5,7 +5,7 @@ using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace AtlasPro.Api.Swagger
+namespace SOP.Api.Swagger
 {
     public class AuthorizationHeaderParameterOperationFilter : IOperationFilter
     {

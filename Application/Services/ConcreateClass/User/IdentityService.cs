@@ -15,7 +15,7 @@ using Microsoft.Extensions.Logging;
 using Application.Services.InterfaceClass.User;
 using Domain.Entities.UserAgg;
 
-namespace Application.Services.Service.Account
+namespace Application.Services.ConcreateClass.User
 {
     public class IdentityApplicationDataBaseContext :
         IdentityDbContext<ApplicationUser, ApplicationRole, int>,
@@ -132,7 +132,7 @@ namespace Application.Services.Service.Account
             if (currentUser == null)
             {
                 initApplicationUser.EmailConfirmed = true;
-                IdentityResult? result;
+                IdentityResult result;
                 if (!string.IsNullOrEmpty(password))
                     result = _userManager.CreateAsync(initApplicationUser, password).Result;
                 else

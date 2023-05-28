@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Presentation.WebApi
+namespace SOP.Api.Helper.Auth
 {
     public class AuthorizeMultiplePolicyFilter : IAsyncAuthorizationFilter
     {
@@ -15,7 +15,7 @@ namespace Presentation.WebApi
         {
             Policy = policy;
             _authorization = authorization;
-            this.IsAll = isAll;
+            IsAll = isAll;
         }
 
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
@@ -50,7 +50,7 @@ namespace Presentation.WebApi
                     }
                 }
 
-                context.Result = isAuthenticated ? new StatusCodeResult(statusCode:403) : new UnauthorizedResult();
+                context.Result = isAuthenticated ? new StatusCodeResult(statusCode: 403) : new UnauthorizedResult();
                 return;
             }
         }

@@ -4,7 +4,6 @@ using Application.BusinessLogic;
 using Application.BusinessLogic.Message;
 using Application.Services.InterfaceClass.Message;
 using Application.Services.Response;
-using Common.Enum;
 using Common.Enums;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;

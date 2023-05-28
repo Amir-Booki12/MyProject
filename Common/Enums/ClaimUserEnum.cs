@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Enum.Claim
+namespace Common.Enums
 {
     public enum ClaimUserEnum
     {
         [Description("UserName")]
-        preferred_username=1,
+        preferred_username = 1,
     }
 }

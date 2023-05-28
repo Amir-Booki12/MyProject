@@ -2,7 +2,6 @@
 using Application.Services.InterfaceClass.User;
 using Application.Services.Response;
 using Application.ViewModels.User;
-using Common.GetDat;
 using Domain.Entities.UserAgg;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -16,16 +15,16 @@ using Application.BusinessLogic.Message;
 using Application.IRepositories;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Bugeto_Store.Common;
 using Common.Enums;
 using Microsoft.EntityFrameworkCore;
 using Application.ViewModels.User.RolesClaims;
-using Common.Enum;
 using Domain.Entities.LocationsAgg;
 using Common.Enums.RolesManagment;
 using Common.Enums.User;
 using Newtonsoft.Json;
 using static QRCoder.PayloadGenerator;
+using Common;
+using Common.GetClaimUtils;
 
 namespace Application.Services.ConcreateClass.User
 {

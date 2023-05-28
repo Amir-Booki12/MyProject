@@ -2,11 +2,13 @@
 using Application.Cross.Interface;
 using Application.Services.ConcreateClass.Location;
 using Application.Services.ConcreateClass.Messages;
+using Application.Services.ConcreateClass.Product;
 using Application.Services.ConcreateClass.User;
 using Application.Services.InterfaceClass.Location;
 using Application.Services.InterfaceClass.Message;
+using Application.Services.InterfaceClass.Products;
 using Application.Services.InterfaceClass.User;
-using Application.Services.Service.Account;
+using Domain.Entities.ProductAgg;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,7 +46,16 @@ namespace Infrastructure.IOC
 
             return services;
         }
+        public static IServiceCollection AddProductService(this IServiceCollection services)
+        {
+            ////Services
+            services.AddScoped<IProductService, ProductService>();
+            
 
-       
+
+            return services;
+        }
+
+
     }
 }
